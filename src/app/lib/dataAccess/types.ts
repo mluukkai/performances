@@ -17,6 +17,7 @@ export interface Database {
   works: WorkTable
   orchestras: OrchestraTable
   chors: ChorTable
+  chors_performances: ChorPerformancesTable
 }
 
 export interface ArtistTable {

@@ -1,9 +1,17 @@
 import { db } from './database'
 
-export async function findPerformances() {
-  const query = db.selectFrom('performances')
+export async function findAll() {
+  const query = db
+    .selectFrom('performances')
+    .leftJoin('works', 'works.id', 'performances.work_id')
+    .leftJoin('composers', 'composers.id', 'works.composer_id')
+    .leftJoin('artists', 'artists.id', 'performances.artist_id')
+    .select([
+      'performances.id', 'performances.date', 'works.name as work', 
+      'composers.name as composer', 'artists.name as conductor'
+    ])
 
-  return await query.selectAll().execute()
+  return await query.execute()
 }
 
 export async function findPerformancesOfArtst(id: number) {

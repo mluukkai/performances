@@ -1,5 +1,5 @@
-import * as ArtistRepository from '../../lib/dataAccess/artistRepository';
-import * as PerformanceRepository from '../../lib/dataAccess/performanceRepository';
+import * as ArtistRepository from '../../../lib/dataAccess/artistRepository';
+import * as PerformanceRepository from '../../../lib/dataAccess/performanceRepository';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);

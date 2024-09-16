@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
-import * as ChorusRepository from '../lib/dataAccess/chorusRepository';
+import * as ComposerRepository from '../../lib/dataAccess/composerRepository';
 
 export default async function Page() {
-  const chors = await ChorusRepository.findAll();
+  const composers = await ComposerRepository.findAll();
 
   return (
     <div>
-      <h2>Kuorot</h2>
+      <h2>Säveltäjät</h2>
       <table className="table-auto w-full">
         <thead>
           <tr>
@@ -17,15 +17,15 @@ export default async function Page() {
         </thead>
         <tbody>
           
-          {chors.map((chor) => (
-            <tr key={chor.id}>
+          {composers.map((composer) => (
+            <tr key={composer.id}>
               <td className="border px-4 py-2">
-                <Link href={`/artists/${chor.id}`}>
-                  <div className="text-blue-500">{chor.name}</div>
+                <Link href={`/artists/${composer.id}`}>
+                  <div className="text-blue-500">{composer.name}</div>
                 </Link>
               </td>
               <td className="border px-4 py-2">
-                {chor.performance_count}
+                {composer.performance_count}
               </td>
             </tr>
           ))}

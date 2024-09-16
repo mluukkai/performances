@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
-import * as ComposerRepository from '../lib/dataAccess/composerRepository';
+import * as OrchesterRepository from '../../lib/dataAccess/orchesterRepository';
 
 export default async function Page() {
-  const composers = await ComposerRepository.findAll();
+  const orchesters = await OrchesterRepository.findAll();
 
   return (
     <div>
-      <h2>Säveltäjät</h2>
+      <h2>Orkesterit</h2>
       <table className="table-auto w-full">
         <thead>
           <tr>
@@ -16,8 +16,7 @@ export default async function Page() {
           </tr>
         </thead>
         <tbody>
-          
-          {composers.map((composer) => (
+          {orchesters.map((composer) => (
             <tr key={composer.id}>
               <td className="border px-4 py-2">
                 <Link href={`/artists/${composer.id}`}>
@@ -29,7 +28,6 @@ export default async function Page() {
               </td>
             </tr>
           ))}
-
         </tbody>
       </table>
 

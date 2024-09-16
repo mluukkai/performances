@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import * as ArtistRepository from '../lib/dataAccess/artistRepository';
+import * as ArtistRepository from '../../lib/dataAccess/artistRepository';
 
 export default async function Page() {
   const artists = await ArtistRepository.findAll();
@@ -14,6 +14,7 @@ export default async function Page() {
             <th className="px-4 py-2">Sukunimi</th>
             <th className="px-4 py-2">Etunimi</th>
             <th className="px-4 py-2">Fakki</th>
+            <th className="px-4 py-2">Esityksiä</th>
           </tr>
         </thead>
         <tbody>
@@ -30,6 +31,9 @@ export default async function Page() {
               </td>
               <td className="border px-4 py-2">
                 {artist.fach}
+              </td>
+              <td className="border px-4 py-2">
+                {artist.performance_count}
               </td>
             </tr>
           ))}
