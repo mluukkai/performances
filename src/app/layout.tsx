@@ -28,7 +28,29 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <nav className="bg-gray-800 p-4">
+          <div className="container mx-auto flex justify-between items-center">
+            <a href="/" className="text-white text-lg font-semibold"></a>
+            <div className="hidden md:flex space-x-4">
+              <a href="/performances" className="text-gray-300 hover:text-white">esitykset</a>
+              <a href="/artists" className="text-gray-300 hover:text-white">artistit</a>
+              <a href="/choruses" className="text-gray-300 hover:text-white">kuorot</a>
+              <a href="/orchestras" className="text-gray-300 hover:text-white">orkesterit</a>
+              <a href="/composers" className="text-gray-300 hover:text-white">säveltäjät</a>
+              <a href="/venues" className="text-gray-300 hover:text-white">paikat</a>
+            </div>
+            <div className="md:hidden">
+              <button className="text-gray-300 hover:text-white focus:outline-none">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </nav>
+        <div className="p-8">
+          {children}
+        </div>
       </body>
     </html>
   );
