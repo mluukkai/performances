@@ -12,6 +12,11 @@ export interface Database {
   venues: VenueTable
   performances: PerformancesTable
   composers: ComposerTable
+  artists_performances: ArtistPerformancesTable
+  orchestras_performances: OrchestraPerformancesTable
+  works: WorkTable
+  orchestras: OrchestraTable
+  chors: ChorTable
 }
 
 export interface ArtistTable {
@@ -49,7 +54,14 @@ export interface PerformancesTable {
   venue_id: number
 }
 
-export type Performances = Selectable<PerformancesTable>
+export type Performance = Selectable<PerformancesTable>
+
+export interface ArtistPerformancesTable {
+  performance_id: number
+  artist_id: number
+}
+
+export type ArtistPerformance = Selectable<ArtistPerformancesTable>
 
 export interface VenueTable {
   id: Generated<number>
@@ -67,7 +79,6 @@ export type Venues = Selectable<VenueTable>
 export interface ComposerTable {
   id: Generated<number>
   name: string
-  composer_id: number
   created_at: ColumnType<Date, string | undefined, never>
   updated_at: ColumnType<Date, string | undefined, never>
 }
@@ -78,8 +89,41 @@ export interface WorkTable {
   id: Generated<number>
   name: string
   composername: string
+  composer_id: number
   created_at: ColumnType<Date, string | undefined, never>
   updated_at: ColumnType<Date, string | undefined, never>
 }
 
 export type Works = Selectable<WorkTable>
+
+export interface OrchestraTable {
+  id: Generated<number>
+  name: string
+  created_at: ColumnType<Date, string | undefined, never>
+  updated_at: ColumnType<Date, string | undefined, never>
+}
+
+export type Orchestra = Selectable<OrchestraTable>
+
+export interface OrchestraPerformancesTable {
+  performance_id: number
+  orchestra_id: number
+}
+
+export type OrchestraPerformances = Selectable<ArtistPerformancesTable>
+
+export interface ChorTable {
+  id: Generated<number>
+  name: string
+  created_at: ColumnType<Date, string | undefined, never>
+  updated_at: ColumnType<Date, string | undefined, never>
+}
+
+export type Chor = Selectable<ChorTable>
+
+export interface ChorPerformancesTable {
+  performance_id: number
+  chor_id: number
+}
+
+export type ChorPerformances = Selectable<ChorPerformancesTable>
