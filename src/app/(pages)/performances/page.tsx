@@ -1,15 +1,15 @@
 import Link from 'next/link';
 
 import * as PerformanceRepository from '../../lib/dataAccess/performanceRepository';
+import { formatDate } from '@/app/lib/util';
 
 export default async function Page() {
   const performances = await PerformanceRepository.findAll();
 
-  console.log(performances);
-
   return (
     <div>
-      <h2>Esitykset</h2>
+      <h2 className="text-4xl font-extrabold dark:text-white">Esitykset</h2>
+
       <table className="table-auto w-full">
         <thead>
           <tr>
@@ -24,7 +24,7 @@ export default async function Page() {
           {performances.map((performance) => (
             <tr key={performance.id}>
               <td className="border px-4 py-2">
-                <Link href={`/artists/${performance.id}`}>
+                <Link href={`/performances/${performance.id}`}>
                   <div className="text-blue-500">{performance.work}</div>
                 </Link>
               </td>
@@ -35,7 +35,7 @@ export default async function Page() {
                 {performance.conductor}
               </td>
               <td className="border px-4 py-2">
-                {performance.date.toDateString()}
+                {formatDate(performance.date)}
               </td>
             </tr>
           ))}

@@ -7,7 +7,7 @@ export default async function Page() {
 
   return (
     <div>
-    <h2>Venues</h2>
+      <h2 className="text-4xl font-extrabold dark:text-white">Venues</h2>
       <table className="table-auto w-full">
         <thead>
           <tr>

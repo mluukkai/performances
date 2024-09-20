@@ -1,4 +1,5 @@
 import { db } from './database'
+import { jsonArrayFrom } from 'kysely/helpers/postgres'
 
 export async function findAll() {
   const query = db
@@ -14,20 +15,39 @@ export async function findAll() {
   return await query.execute()
 }
 
-export async function findPerformancesOfArtst(id: number) {
+export async function findOne(id: number) {
   const query = db
-    .selectFrom('artists')
-    .innerJoin('artists_performances', 'artists.id', 'artists_performances.artist_id')
-    .innerJoin('performances', 'performances.id', 'artists_performances.performance_id')
-    .innerJoin('venues', 'venues.id', 'performances.venue_id')
-    .innerJoin('works', 'works.id', 'performances.work_id')
-    .innerJoin('composers', 'composers.id', 'works.composer_id')
-    .select(['performances.date', 'performances.id',
-      'venues.name as venue', 'works.name as work', 'composers.name as composer'
+    .selectFrom('performances')
+    .leftJoin('works', 'works.id', 'performances.work_id')
+    .leftJoin('composers', 'composers.id', 'works.composer_id')
+    .leftJoin('artists', 'artists.id', 'performances.artist_id')
+    .leftJoin('venues', 'venues.id', 'performances.venue_id')
+    .select([
+      'performances.id', 'performances.date', 'works.name as work', 
+      'composers.name as composer', 'artists.name as conductor',
+      'venues.name as venue'
     ])
-    .where('artists.id', '=', id)
+    .select((eb) => [
+      jsonArrayFrom(
+        eb.selectFrom('orchestras')
+          .leftJoin('orchestras_performances', 'orchestras.id', 'orchestras_performances.orchestra_id')
+          .select(['orchestras.id', 'orchestras.name'])
+          .whereRef('orchestras_performances.performance_id', '=', 'performances.id')
+      ).as('orchestras'),
+      jsonArrayFrom(
+        eb.selectFrom('chors')
+          .leftJoin('chors_performances', 'chors.id', 'chors_performances.chor_id')
+          .select(['chors.id', 'chors.name'])
+          .whereRef('chors_performances.performance_id', '=', 'performances.id')
+      ).as('choruses'),
+      jsonArrayFrom(
+        eb.selectFrom('artists')
+          .leftJoin('artists_performances', 'artists.id', 'artists_performances.artist_id')
+          .select(['artists.id', 'artists.name', 'artists.fach', 'artists.firstname'])
+          .whereRef('artists_performances.performance_id', '=', 'performances.id')
+      ).as('solists'),
+    ])
+    .where('performances.id', '=', id)
 
-  console.log(query.compile())
-
-  return await query.execute()
+  return await query.executeTakeFirst() 
 }

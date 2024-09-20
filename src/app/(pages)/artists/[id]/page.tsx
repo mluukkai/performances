@@ -1,5 +1,5 @@
+import Performances from '@/app/components/Performances';
 import * as ArtistRepository from '../../../lib/dataAccess/artistRepository';
-import * as PerformanceRepository from '../../../lib/dataAccess/performanceRepository';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
@@ -9,38 +9,17 @@ export default async function Page({ params }: { params: { id: string } }) {
     return <div>Artistia ei löytynyt</div>
   }
 
-  const performances = await PerformanceRepository.findPerformancesOfArtst(id);
-
-  console.log(performances);
+  const performances = await ArtistRepository.findPerformancesOf(id);
 
   return (
     <div>
-      <h2>{artist.firstname} {artist.name}</h2>
+      <h2 className="text-3xl font-extrabold dark:text-white">
+        {artist.firstname} {artist.name}
+      </h2>
 
       <div>{artist.fach}</div>
 
-      <h3>Esitykset</h3>
-
-      <table className="table-auto w-full">
-        <thead>
-          <tr>
-            <th className="px-4 py-2">Teos</th>
-            <th className="px-4 py-2">Säveltäjä</th>
-            <th className="px-4 py-2">Paikka</th>
-            <th className="px-4 py-2">Päivämäärä</th>
-          </tr>
-        </thead>
-        <tbody>
-          {performances.map((performance) => (
-            <tr key={performance.id}>
-              <td className="border px-4 py-2">{performance.work}</td>
-              <td className="border px-4 py-2">{performance.composer}</td>
-              <td className="border px-4 py-2">{performance.venue}</td>
-              <td className="border px-4 py-2">{performance.date.toDateString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Performances performances={performances} />
     </div>
   );
 }

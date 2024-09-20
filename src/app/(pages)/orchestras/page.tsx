@@ -7,7 +7,7 @@ export default async function Page() {
 
   return (
     <div>
-      <h2>Orkesterit</h2>
+      <h2 className="text-4xl font-extrabold dark:text-white">Orkesterit</h2>
       <table className="table-auto w-full">
         <thead>
           <tr>
@@ -16,15 +16,15 @@ export default async function Page() {
           </tr>
         </thead>
         <tbody>
-          {orchesters.map((composer) => (
-            <tr key={composer.id}>
+          {orchesters.map((orchestra) => (
+            <tr key={orchestra.id}>
               <td className="border px-4 py-2">
-                <Link href={`/artists/${composer.id}`}>
-                  <div className="text-blue-500">{composer.name}</div>
+                <Link href={`/orchestras/${orchestra.id}`}>
+                  <div className="text-blue-500">{orchestra.name}</div>
                 </Link>
               </td>
               <td className="border px-4 py-2">
-                {composer.performance_count}
+                {orchestra.performance_count}
               </td>
             </tr>
           ))}
