@@ -1,23 +1,21 @@
 import Performances from '@/app/components/Performances';
-import * as ArtistRepository from '../../../lib/dataAccess/artistRepository';
+import * as ChorusRepository from '../../../lib/dataAccess/chorusRepository';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
-  const artist = await ArtistRepository.findOne(id);
+  const chorus = await ChorusRepository.findOne(id);
 
-  if(!artist) {
-    return <div>Artistia ei löytynyt</div>
+  if(!chorus) {
+    return <div>No chorus found</div>
   }
 
-  const performances = await ArtistRepository.findPerformancesOf(id);
+  const performances = await ChorusRepository.findPerformancesOf(id);
 
   return (
     <div>
       <h2 className="text-3xl font-extrabold dark:text-white">
-        {artist.firstname} {artist.name}
+        {chorus.name}
       </h2>
-
-      <div>{artist.fach}</div>
 
       <Performances performances={performances} />
     </div>

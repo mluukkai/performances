@@ -1,25 +1,46 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Performances = ({ performances } : { performances: any[]}) => {
+import { formatDate } from "../lib/util";
+import Link from 'next/link';
+import { ArrowRightIcon } from '@heroicons/react/24/solid'
+
+interface PerformanceProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+ performances: any[]
+ skip?: 'composer' | 'venue'
+}
+
+const Performances = ({ performances, skip } : PerformanceProps) => {
+  const skipComposer = skip === 'composer'
+  const skipVenue = skip === 'venue'
   return (
     <div className="mt-3">
-      <h3 className="text-2xl font-bold dark:text-white">Esitykset</h3>
+      <h3 className="text-2xl font-bold dark:text-white">Performances</h3>
 
       <table className="table-auto w-full">
         <thead>
           <tr>
-            <th className="px-4 py-2">Teos</th>
-            <th className="px-4 py-2">Säveltäjä</th>
-            <th className="px-4 py-2">Paikka</th>
-            <th className="px-4 py-2">Päivämäärä</th>
+            <th className="px-4 py-2">Work</th>
+            {!skipComposer &&<th className="px-4 py-2">Composer</th>}
+            {!skipVenue &&<th className="px-4 py-2">Venue</th>}
+            <th className="px-4 py-2">Date</th>
+            <th className="px-4 py-2" />
           </tr>
         </thead>
         <tbody>
           {performances.map((performance) => (
             <tr key={performance.id}>
-              <td className="border px-4 py-2">{performance.work}</td>
-              <td className="border px-4 py-2">{performance.composer}</td>
-              <td className="border px-4 py-2">{performance.venue}</td>
-              <td className="border px-4 py-2">{performance.date.toDateString()}</td>
+              <td className="border px-4 py-2">
+                <Link href={`/performances/${performance.id}`}>
+                  <div className="text-blue-500">{performance.work}</div>
+                </Link>
+              </td>
+              {!skipComposer &&<td className="border px-4 py-2">{performance.composer}</td>}
+              {!skipVenue &&<td className="border px-4 py-2">{performance.venue}</td>}
+              <td className="border px-4 py-2">{formatDate(performance.date)}</td>
+              <td className="border px-4 py-2">
+                <Link href={`/performances/${performance.id}`}>
+                  <ArrowRightIcon className="size-6 text-blue-500" />
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

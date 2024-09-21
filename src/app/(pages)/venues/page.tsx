@@ -12,9 +12,9 @@ export default async function Page() {
         <thead>
           <tr>
             <th className="px-4 py-2"></th>
-            <th className="px-4 py-2">kaupunki</th>
-            <th className="px-4 py-2">osoite</th>
-            <th className="px-4 py-2">maa</th>
+            <th className="px-4 py-2">City</th>
+            <th className="px-4 py-2">Street</th>
+            <th className="px-4 py-2">Country</th>
           </tr>
         </thead>
         <tbody>
@@ -22,7 +22,7 @@ export default async function Page() {
           {venues.map((venue) => (
             <tr key={venue.id}>
               <td className="border px-4 py-2">
-                <Link href={`/artists/${venue.id}`}>
+                <Link href={`/venues/${venue.id}`}>
                   <div className="text-blue-500">{venue.name}</div>
                 </Link>
               </td>

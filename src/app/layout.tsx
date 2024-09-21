@@ -32,12 +32,13 @@ export default function RootLayout({
           <div className="container mx-auto flex justify-between items-center">
             <a href="/" className="text-white text-lg font-semibold"></a>
             <div className="hidden md:flex space-x-4">
-              <a href="/performances" className="text-gray-300 hover:text-white">esitykset</a>
-              <a href="/artists" className="text-gray-300 hover:text-white">artistit</a>
-              <a href="/choruses" className="text-gray-300 hover:text-white">kuorot</a>
-              <a href="/orchestras" className="text-gray-300 hover:text-white">orkesterit</a>
-              <a href="/composers" className="text-gray-300 hover:text-white">säveltäjät</a>
-              <a href="/venues" className="text-gray-300 hover:text-white">paikat</a>
+              <a href="/performances" className="text-gray-300 hover:text-white">Performances</a>
+              <a href="/singers" className="text-gray-300 hover:text-white">Singers</a>
+              <a href="/conductors" className="text-gray-300 hover:text-white">Conductors</a>
+              <a href="/choruses" className="text-gray-300 hover:text-white">Chors</a>
+              <a href="/orchestras" className="text-gray-300 hover:text-white">Orchestras</a>
+              <a href="/composers" className="text-gray-300 hover:text-white">Composers</a>
+              <a href="/venues" className="text-gray-300 hover:text-white">Venues</a>
             </div>
             <div className="md:hidden">
               <button className="text-gray-300 hover:text-white focus:outline-none">

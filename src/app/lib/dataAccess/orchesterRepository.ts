@@ -24,7 +24,10 @@ export async function findOne(id: number) {
   return await query.executeTakeFirst()
 }
 
+
+
 export async function findPerformancesOf(id: number) {
+
   const query = db
     .selectFrom('orchestras')
     .leftJoin('orchestras_performances', 'orchestras.id', 'orchestras_performances.orchestra_id')

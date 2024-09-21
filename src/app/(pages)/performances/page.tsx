@@ -8,15 +8,17 @@ export default async function Page() {
 
   return (
     <div>
-      <h2 className="text-4xl font-extrabold dark:text-white">Esitykset</h2>
+      <h2 className="text-4xl font-extrabold dark:text-white">
+        Performances
+      </h2>
 
-      <table className="table-auto w-full">
+      <table className="table-fixed">
         <thead>
           <tr>
-            <th className="px-4 py-2">Teos</th>
-            <th className="px-4 py-2">Säveltäjä</th>
-            <th className="px-4 py-2">Kapellimestarti</th>
-            <th className="px-4 py-2">Päivä</th>
+            <th className="px-4 py-2">Work</th>
+            <th className="px-4 py-2">Composer</th>
+            <th className="px-4 py-2">Conductor</th>
+            <th className="px-4 py-2">Date</th>
           </tr>
         </thead>
         <tbody>

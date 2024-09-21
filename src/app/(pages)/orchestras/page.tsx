@@ -7,12 +7,14 @@ export default async function Page() {
 
   return (
     <div>
-      <h2 className="text-4xl font-extrabold dark:text-white">Orkesterit</h2>
-      <table className="table-auto w-full">
+      <h2 className="text-4xl font-extrabold dark:text-white">
+        Orchestras
+      </h2>
+      <table className="table-fixed">
         <thead>
           <tr>
-            <th className="px-4 py-2">Nimi</th>
-            <th className="px-4 py-2">Esityksiä</th>
+            <th className="px-4 py-2 w-64">Name</th>
+            <th className="px-4 py-2 w-32">Performances</th>
           </tr>
         </thead>
         <tbody>

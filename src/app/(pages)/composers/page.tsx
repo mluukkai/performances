@@ -7,24 +7,27 @@ export default async function Page() {
 
   return (
     <div>
-      <h2 className="text-4xl font-extrabold dark:text-white">Säveltäjät</h2>
-      <table className="table-auto w-full">
+      <h2 className="text-4xl font-extrabold dark:text-white">
+        Composers
+      </h2>
+
+      <table className="table-fixed">
         <thead>
           <tr>
-            <th className="px-4 py-2">Nimi</th>
-            <th className="px-4 py-2">Esityksiä</th>
+            <th className="px-4 py-2">Name</th>
+            <th className="px-4 py-2">Performances</th>
           </tr>
         </thead>
         <tbody>
           
           {composers.map((composer) => (
             <tr key={composer.id}>
-              <td className="border px-4 py-2">
-                <Link href={`/artists/${composer.id}`}>
+              <td className="border px-4 py-2 w-64">
+                <Link href={`/composers/${composer.id}`}>
                   <div className="text-blue-500">{composer.name}</div>
                 </Link>
               </td>
-              <td className="border px-4 py-2">
+              <td className="border px-4 py-2 w-32">
                 {composer.performance_count}
               </td>
             </tr>
