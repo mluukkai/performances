@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import * as ChorusRepository from '../../lib/dataAccess/chorusRepository';
+import * as ChorusRepository from '@/app/lib/dataAccess/chorusRepository';
 
 export default async function Page() {
   const chors = await ChorusRepository.findAll();

@@ -1,5 +1,5 @@
 import Performances from '@/app/components/Performances';
-import * as ChorusRepository from '../../../lib/dataAccess/chorusRepository';
+import * as ChorusRepository from '@/app/lib/dataAccess/chorusRepository';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);

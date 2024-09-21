@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import * as ArtistRepository from '../../lib/dataAccess/artistRepository';
+import * as ArtistRepository from '@/app/lib/dataAccess/artistRepository';
 
 export default async function Page() {
   const artists = await ArtistRepository.findAll('singer');
@@ -11,10 +11,18 @@ export default async function Page() {
         Singers
       </h2>
       
+      <div className="mt-5 mb-5">      
+        <a 
+          href="/singers/new"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+          Create a new
+        </a>
+      </div>
+
       <table className="table-fixed">
         <thead>
           <tr>
-            <th className="px-4 py-2 ">Last name</th>
+            <th className="px-4 py-2">Last name</th>
             <th className="px-4 py-2">First name</th>
             <th className="px-4 py-2">Fach</th>
             <th className="px-4 py-2">Performances</th>

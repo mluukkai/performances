@@ -1,5 +1,5 @@
 import Performances from '@/app/components/Performances';
-import * as ComposersRepository from '../../../lib/dataAccess/composerRepository';
+import * as ComposersRepository from '@/app/lib/dataAccess/composerRepository';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);

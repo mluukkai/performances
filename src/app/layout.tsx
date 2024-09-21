@@ -38,6 +38,7 @@ export default function RootLayout({
               <a href="/choruses" className="text-gray-300 hover:text-white">Chors</a>
               <a href="/orchestras" className="text-gray-300 hover:text-white">Orchestras</a>
               <a href="/composers" className="text-gray-300 hover:text-white">Composers</a>
+              <a href="/works" className="text-gray-300 hover:text-white">Works</a>
               <a href="/venues" className="text-gray-300 hover:text-white">Venues</a>
             </div>
             <div className="md:hidden">

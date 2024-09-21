@@ -1,5 +1,5 @@
 import Performances from '@/app/components/Performances';
-import * as VenuesRepository from '../../../lib/dataAccess/venueRepository';
+import * as VenuesRepository from '@/app/lib/dataAccess/venueRepository';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);

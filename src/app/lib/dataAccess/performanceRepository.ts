@@ -10,7 +10,7 @@ export async function findAll() {
     .select([
       'performances.id', 'performances.date', 'works.name as work', 
       'composers.name as composer', 'artists.name as conductor'
-    ])
+    ]).orderBy('performances.date', 'desc')
 
   return await query.execute()
 }
@@ -63,4 +63,54 @@ export async function findOne(id: number) {
     .where('performances.id', '=', id)
 
   return await query.executeTakeFirst() 
+}
+
+export async function create(date: string, work_id: number, venue_id: number, artist_id: number, note: string ) {
+  const result = await db
+    .insertInto('performances')
+    .values({
+      work_id, venue_id, artist_id,
+      note,
+      date: new Date(date).toISOString(),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()  
+    })
+    .returning('id')
+    .executeTakeFirst()
+
+  return result
+}
+
+export async function addOrchestras(performance_id: number, orchestras: number[]) {
+  for (let orchestra_id of orchestras) {
+    await db
+      .insertInto('orchestras_performances')
+      .values({
+        performance_id, orchestra_id,
+      })
+      .executeTakeFirst()
+  }
+
+}
+
+export async function addChors(performance_id: number, chors: number[]) {
+  for (let chor_id of chors) {
+    await db
+    .insertInto('chors_performances')
+    .values({
+      performance_id, chor_id,
+    })
+    .executeTakeFirst()
+  }
+}
+
+export async function addSingers(performance_id: number, singers: number[]) {
+  for (let artist_id of singers) {
+    await db
+    .insertInto('artists_performances')
+    .values({
+      performance_id, artist_id,
+    })
+    .executeTakeFirst()
+  }
 }

@@ -14,10 +14,9 @@ export async function findAll(type: 'singer' | 'conductor') {
       db.fn.count('artists_performances.artist_id').as('performance_count')
     ])
     .groupBy('artists.id')
-    .having(db.fn.count('artists_performances.artist_id'), '>', 0)
     .orderBy('name')
 
-    return await query.execute()
+    return (await query.execute()).filter(a=> a.fach.length > 0)  
   } 
   
   const query = db
@@ -64,8 +63,6 @@ export async function findPerformancesOf(id: number, type: 'singer' | 'conductor
     return await query.execute()
   }
 
-  console.log('findPerformancesOf conductor')
-
   const query = db
     .selectFrom('artists')
     .innerJoin('performances', 'artists.id', 'performances.artist_id')
@@ -78,4 +75,17 @@ export async function findPerformancesOf(id: number, type: 'singer' | 'conductor
     .where('artists.id', '=', id)
 
   return await query.execute()
+}
+
+export async function create(name: string, firstname: string, fach: string, conductor: boolean) {
+  const result = await db
+    .insertInto('artists')
+    .values({
+      name, firstname, fach, conductor,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()  
+    })
+    .executeTakeFirst()
+
+  return result.insertId
 }

@@ -1,6 +1,6 @@
 import { db } from './database'
 
-export async function findVenues() {
+export async function findAll() {
   const query = db.selectFrom('venues')
 
   return await query.selectAll().execute()

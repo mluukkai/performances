@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import * as ComposerRepository from '../../lib/dataAccess/composerRepository';
+import * as ComposerRepository from '@/app/lib/dataAccess/composerRepository';
 
 export default async function Page() {
   const composers = await ComposerRepository.findAll();

@@ -1,6 +1,6 @@
 
 import Performances from '@/app/components/Performances';
-import * as OrchesterRepository from '../../../lib/dataAccess/orchesterRepository';
+import * as OrchesterRepository from '@/app/lib/dataAccess/orchesterRepository';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = Number(params.id);
