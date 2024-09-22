@@ -114,3 +114,12 @@ export async function addSingers(performance_id: number, singers: number[]) {
     .executeTakeFirst()
   }
 }
+
+export async function addUser(performance_id: number, user_id: number) {
+    await db
+    .insertInto('performances_users')
+    .values({
+      performance_id, user_id,
+    })
+    .executeTakeFirst()
+}

@@ -18,6 +18,7 @@ export interface Database {
   orchestras: OrchestraTable
   chors: ChorTable
   chors_performances: ChorPerformancesTable
+  performances_users: PerformanceUserTable
 }
 
 export interface ArtistTable {
@@ -35,7 +36,7 @@ export type NewArtist = Insertable<ArtistTable>
 export type ArtistUpdate = Updateable<ArtistTable>
 
 export interface UserTable {
-  id: Generated<string>
+  id: Generated<number>
   name: string
   hashed_password: string
 }
@@ -61,6 +62,13 @@ export interface ArtistPerformancesTable {
 }
 
 export type ArtistPerformance = Selectable<ArtistPerformancesTable>
+
+export interface PerformanceUserTable {
+  performance_id: number
+  user_id: number
+}
+
+export type PerformanceUser = Selectable<PerformanceUserTable>
 
 export interface VenueTable {
   id: Generated<number>

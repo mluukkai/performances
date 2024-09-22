@@ -4,6 +4,7 @@ import * as Artists from '@/app/lib/dataAccess/artistRepository';
 import * as Works from '@/app/lib/dataAccess/worksRepository';
 import * as Composers from '@/app/lib/dataAccess/composerRepository';
 import * as Performances from '@/app/lib/dataAccess/performanceRepository';
+import * as Users from '@/app/lib/dataAccess/userRepository';
 
 import { signIn, auth } from '@/auth';
 
@@ -52,10 +53,16 @@ export async function createArtist(formData: FormData) {
 export async function createPerformance(formData: FormData) {
   const session = await auth()
 
-  if (!session?.user) {
+  if (!session?.user || !session.user.name) {
     redirect('/login')
   }
+
+  const user = await Users.findOne(session.user.name)
   
+  if (!user) {
+    redirect('/login')
+  }
+
   const date = formData.get('date') as string;
   const workId = Number(formData.get('work'));
   const conductorId = Number(formData.get('conductor'));
@@ -68,6 +75,7 @@ export async function createPerformance(formData: FormData) {
   if (result) {
     await Performances.addOrchestras(result.id, orchestras)
     await Performances.addChors(result.id, chors)
+    await Performances.addUser(result.id, user.id)
     redirect(`/performances/${result.id}`)
   }
 }
