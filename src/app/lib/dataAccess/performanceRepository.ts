@@ -82,7 +82,7 @@ export async function create(date: string, work_id: number, venue_id: number, ar
 }
 
 export async function addOrchestras(performance_id: number, orchestras: number[]) {
-  for (let orchestra_id of orchestras) {
+  for (const orchestra_id of orchestras) {
     await db
       .insertInto('orchestras_performances')
       .values({
@@ -94,7 +94,7 @@ export async function addOrchestras(performance_id: number, orchestras: number[]
 }
 
 export async function addChors(performance_id: number, chors: number[]) {
-  for (let chor_id of chors) {
+  for (const chor_id of chors) {
     await db
     .insertInto('chors_performances')
     .values({
@@ -105,7 +105,7 @@ export async function addChors(performance_id: number, chors: number[]) {
 }
 
 export async function addSingers(performance_id: number, singers: number[]) {
-  for (let artist_id of singers) {
+  for (const artist_id of singers) {
     await db
     .insertInto('artists_performances')
     .values({

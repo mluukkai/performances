@@ -81,9 +81,6 @@ export async function addSingers(formData: FormData) {
 }
 
 export async function authenticate(formData: FormData) {
-  const username = formData.get('username') as string;
-  const password = formData.get('password') as string;
-  
   try {
     await signIn('credentials', formData);
     redirect(`/`)
