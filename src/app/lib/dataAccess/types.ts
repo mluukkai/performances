@@ -36,10 +36,8 @@ export type ArtistUpdate = Updateable<ArtistTable>
 
 export interface UserTable {
   id: Generated<string>
-  firstname: string
   name: string
-  email: string
-  password: string
+  hashed_password: string
 }
 
 export type User = Selectable<UserTable>

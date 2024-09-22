@@ -145,7 +145,9 @@ export default async function Page() {
 
         </div>
 
-        <button type="submit" className="bg-blue-500 text-white p-2 m-2">Create</button>
+        <button type="submit" className="bg-blue-500 text-white pt-1 pb-1 pl-5 pr-5 m-2 rounded-md">
+          Create
+        </button>
       </form>
 
     </div>

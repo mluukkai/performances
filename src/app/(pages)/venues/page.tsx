@@ -1,9 +1,10 @@
 
 import Link from 'next/link';
-import * as VenueRepository from '@/app/lib/dataAccess/venueRepository';
+
+import * as Venues from '@/app/lib/dataAccess/venueRepository';
 
 export default async function Page() {
-  const venues = await VenueRepository.findAll()
+  const venues = await Venues.findAll()
 
   return (
     <div>

@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-import * as ArtistRepository from '@/app/lib/dataAccess/artistRepository';
+import * as Artists from '@/app/lib/dataAccess/artistRepository';
 
 export default async function Page() {
-  const artists = await ArtistRepository.findAll('conductor');
+  const artists = await Artists.findAll('conductor');
 
   return (
     <div>

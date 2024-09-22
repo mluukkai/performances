@@ -5,6 +5,8 @@ import * as Works from '@/app/lib/dataAccess/worksRepository';
 import * as Composers from '@/app/lib/dataAccess/composerRepository';
 import * as Performances from '@/app/lib/dataAccess/performanceRepository';
 
+import { signIn, auth } from '@/auth';
+
 import { redirect } from 'next/navigation';
 
 export type State = {
@@ -12,6 +14,12 @@ export type State = {
 };
 
 export async function createWork(formData: FormData) {
+  const session = await auth()
+
+  if (!session?.user) {
+    redirect('/login')
+  }
+
   const name = formData.get('name') as string;
   const composerId = Number(formData.get('composer'));
 
@@ -25,6 +33,12 @@ export async function createWork(formData: FormData) {
 }
 
 export async function createArtist(formData: FormData) {
+  const session = await auth()
+
+  if (!session?.user) {
+    redirect('/login')
+  }
+
   const name = formData.get('name') as string;
   const firstname = formData.get('firstname') as string;
   const fach = formData.get('fach') as string;
@@ -36,6 +50,12 @@ export async function createArtist(formData: FormData) {
 }
 
 export async function createPerformance(formData: FormData) {
+  const session = await auth()
+
+  if (!session?.user) {
+    redirect('/login')
+  }
+  
   const date = formData.get('date') as string;
   const workId = Number(formData.get('work'));
   const conductorId = Number(formData.get('conductor'));
@@ -58,4 +78,17 @@ export async function addSingers(formData: FormData) {
 
   await Performances.addSingers(performance_id, singers)
   redirect(`/performances/${performance_id}`)
+}
+
+export async function authenticate(formData: FormData) {
+  const username = formData.get('username') as string;
+  const password = formData.get('password') as string;
+  
+  try {
+    await signIn('credentials', formData);
+    redirect(`/`)
+  } catch (error) {
+    console.error('Failed to sign in', error);
+    throw error;
+  }
 }

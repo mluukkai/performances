@@ -3,7 +3,6 @@ import { fachs } from '@/app/lib/util';
 
 export default async function Page() {
 
-
   return (
     <div>
       <h3 className="text-4xl font-extrabold dark:text-white">
@@ -51,7 +50,9 @@ export default async function Page() {
 
         </div>
 
-        <button type="submit" className="bg-blue-500 text-white p-2 m-2">Save</button>
+        <button type="submit" className="bg-blue-500 text-white pt-1 pb-1 pl-5 pr-5 m-2 rounded-md">
+          Save
+        </button>
       </form>
 
     </div>
